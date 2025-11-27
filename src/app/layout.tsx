@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   title: "Unfoldlogic Blog",
   description: "Insights and tutorials from Unfoldlogic",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

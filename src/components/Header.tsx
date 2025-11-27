@@ -44,10 +44,13 @@ export function Header() {
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center space-x-2 group">
-                        <div className="relative">
-                            <Sparkles className="h-6 w-6 text-primary transition-transform group-hover:rotate-12 group-hover:scale-110" />
-                            <div className="absolute inset-0 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Link href="/" className="flex items-center space-x-3 group">
+                        <div className="relative h-10 w-10">
+                            <img
+                                src="/logo.png"
+                                alt="Unfold Logic"
+                                className="h-full w-full object-contain transition-transform group-hover:scale-110"
+                            />
                         </div>
                         <span className="font-bold text-xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
                             Unfoldlogic
