@@ -353,7 +353,7 @@ export default function AdminDashboard() {
                             </div>
 
                             {/* Markdown Toolbar */}
-                            <div className="sticky top-0 z-10 bg-background flex items-center gap-2 p-2 bg-muted/50 rounded-lg border flex-wrap shadow-sm">
+                            <div className="sticky top-16 z-40 bg-card/95 backdrop-blur-sm flex items-center gap-2 p-3 rounded-lg border flex-wrap shadow-md -mx-1 mb-4">
                                 <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("**", "**")} title="Bold"><strong>B</strong></Button>
                                 <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("*", "*")} title="Italic"><em>I</em></Button>
                                 <div className="w-px h-4 bg-border mx-1" />
