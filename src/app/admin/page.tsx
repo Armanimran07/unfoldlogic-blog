@@ -11,8 +11,15 @@ import {
     Tag,
     Eye,
     Save,
-    Upload
+    Upload,
+    List,
+    ListOrdered,
+    Quote,
+    Minus,
+    Table as TableIcon,
+    Columns
 } from "lucide-react";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 export default function AdminDashboard() {
     const router = useRouter();
@@ -29,6 +36,8 @@ export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState("create");
     const [posts, setPosts] = useState<any[]>([]);
     const [editingId, setEditingId] = useState<string | null>(null);
+    const [isUploading, setIsUploading] = useState(false);
+    const [showPreview, setShowPreview] = useState(true);
 
     useEffect(() => {
         const isAuth = document.cookie.includes("admin_auth=true");
@@ -208,6 +217,62 @@ export default function AdminDashboard() {
         }, 0);
     };
 
+    const handleContentImageUpload = () => {
+        document.getElementById('content-image-upload')?.click();
+    };
+
+    const onContentImageSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        await uploadAndInsertImage(file);
+        // Reset the input so the same file can be selected again if needed
+        e.target.value = "";
+    };
+
+    const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const items = e.clipboardData.items;
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf("image") !== -1) {
+                e.preventDefault();
+                const file = items[i].getAsFile();
+                if (file) {
+                    await uploadAndInsertImage(file);
+                }
+                return;
+            }
+        }
+    };
+
+    const uploadAndInsertImage = async (file: File) => {
+        setIsUploading(true);
+        try {
+            const { uploadImage } = await import("@/lib/supabase");
+            const url = await uploadImage(file);
+            if (url) {
+                // Use HTML img tag to support resizing
+                insertMarkdown(`<img src="${url}" alt="Image" width="100%" />`);
+            } else {
+                alert("Failed to upload image");
+            }
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            alert("Error uploading image");
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const insertTable = () => {
+        const tableTemplate = `
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1   | Cell 2   |
+| Cell 3   | Cell 4   |
+`;
+        insertMarkdown(tableTemplate);
+    };
+
     return (
         <div className="container py-10 max-w-6xl mx-auto">
             <div className="mb-8 flex justify-between items-center">
@@ -263,7 +328,7 @@ export default function AdminDashboard() {
                             </div>
 
                             {/* Markdown Toolbar */}
-                            <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border">
+                            <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border flex-wrap">
                                 <Button
                                     type="button"
                                     variant="ghost"
@@ -291,6 +356,54 @@ export default function AdminDashboard() {
                                 >
                                     H2
                                 </Button>
+                                <div className="w-px h-4 bg-border mx-1" />
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => insertMarkdown("- ")}
+                                    title="Bullet List"
+                                >
+                                    <List className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => insertMarkdown("1. ")}
+                                    title="Numbered List"
+                                >
+                                    <ListOrdered className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => insertMarkdown("> ")}
+                                    title="Quote"
+                                >
+                                    <Quote className="h-4 w-4" />
+                                </Button>
+                                <div className="w-px h-4 bg-border mx-1" />
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={insertTable}
+                                    title="Table"
+                                >
+                                    <TableIcon className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => insertMarkdown("---\n")}
+                                    title="Horizontal Rule"
+                                >
+                                    <Minus className="h-4 w-4" />
+                                </Button>
+                                <div className="w-px h-4 bg-border mx-1" />
                                 <Button
                                     type="button"
                                     variant="ghost"
@@ -304,25 +417,70 @@ export default function AdminDashboard() {
                                     type="button"
                                     variant="ghost"
                                     size="sm"
+                                    onClick={handleContentImageUpload}
+                                    disabled={isUploading}
+                                    title="Upload Image"
+                                >
+                                    {isUploading ? <span className="animate-spin">⏳</span> : <ImageIcon className="h-4 w-4" />}
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
                                     onClick={() => insertMarkdown("```\n", "\n```")}
                                     title="Code Block"
                                 >
                                     {"</>"}
                                 </Button>
+                                {/* Hidden input for content image upload */}
+                                <input
+                                    type="file"
+                                    id="content-image-upload"
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={onContentImageSelected}
+                                />
                             </div>
 
-                            {/* Content Editor */}
+                            {/* Content Editor & Preview */}
                             <div className="space-y-2">
-                                <label className="text-sm font-medium">Content (Markdown supported)</label>
-                                <TextareaAutosize
-                                    name="content"
-                                    value={content}
-                                    onChange={(e) => setContent(e.target.value)}
-                                    required
-                                    minRows={15}
-                                    placeholder="Write your post content here... You can use Markdown formatting."
-                                    className="flex w-full rounded-lg border border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
-                                />
+                                <div className="flex items-center justify-between">
+                                    <label className="text-sm font-medium">Content (Markdown supported)</label>
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setShowPreview(!showPreview)}
+                                        className="gap-2"
+                                    >
+                                        <Columns className="h-4 w-4" />
+                                        {showPreview ? "Hide Preview" : "Show Preview"}
+                                    </Button>
+                                </div>
+
+                                <div className={`grid gap-6 ${showPreview ? 'lg:grid-cols-2' : ''}`}>
+                                    <div className="space-y-2">
+                                        <TextareaAutosize
+                                            name="content"
+                                            value={content}
+                                            onChange={(e) => setContent(e.target.value)}
+                                            onPaste={handlePaste}
+                                            required
+                                            minRows={20}
+                                            placeholder="Write your post content here... You can use Markdown formatting. Paste images directly!"
+                                            className="flex w-full rounded-lg border border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none font-mono"
+                                        />
+                                    </div>
+
+                                    {showPreview && (
+                                        <div className="border rounded-lg p-6 bg-card overflow-y-auto max-h-[600px] prose-sm">
+                                            <div className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-wider border-b pb-2">
+                                                Live Preview
+                                            </div>
+                                            <MarkdownRenderer content={content || "*Start writing to see preview...*"} />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             {/* Meta & Media */}
