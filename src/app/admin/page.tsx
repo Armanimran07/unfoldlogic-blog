@@ -17,7 +17,19 @@ import {
     Quote,
     Minus,
     Table as TableIcon,
-    Columns
+    Columns,
+    AlignLeft,
+    AlignCenter,
+    AlignRight,
+    AlignJustify,
+    Captions,
+    Heading as HeadingIcon,
+    Heading1,
+    Heading2,
+    Heading3,
+    Heading4,
+    Heading5,
+    Heading6
 } from "lucide-react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
@@ -38,6 +50,7 @@ export default function AdminDashboard() {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
     const [showPreview, setShowPreview] = useState(true);
+    const [showHeadings, setShowHeadings] = useState(false);
 
     useEffect(() => {
         const isAuth = document.cookie.includes("admin_auth=true");
@@ -273,6 +286,18 @@ export default function AdminDashboard() {
         insertMarkdown(tableTemplate);
     };
 
+    const wrapSelection = (before: string, after: string) => {
+        insertMarkdown(before, after);
+    };
+
+    const insertAlignment = (align: 'left' | 'center' | 'right' | 'justify') => {
+        wrapSelection(`<div style="text-align: ${align}">`, '</div>');
+    };
+
+    const insertCaption = () => {
+        wrapSelection('<figure>', '\n  <figcaption>Caption here</figcaption>\n</figure>');
+    };
+
     return (
         <div className="container py-10 max-w-6xl mx-auto">
             <div className="mb-8 flex justify-between items-center">
@@ -329,117 +354,65 @@ export default function AdminDashboard() {
 
                             {/* Markdown Toolbar */}
                             <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border flex-wrap">
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("**", "**")}
-                                    title="Bold"
-                                >
-                                    <strong>B</strong>
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("*", "*")}
-                                    title="Italic"
-                                >
-                                    <em>I</em>
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("## ", "")}
-                                    title="Heading"
-                                >
-                                    H2
-                                </Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("**", "**")} title="Bold"><strong>B</strong></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("*", "*")} title="Italic"><em>I</em></Button>
                                 <div className="w-px h-4 bg-border mx-1" />
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("- ")}
-                                    title="Bullet List"
-                                >
-                                    <List className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("1. ")}
-                                    title="Numbered List"
-                                >
-                                    <ListOrdered className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("> ")}
-                                    title="Quote"
-                                >
-                                    <Quote className="h-4 w-4" />
-                                </Button>
+                                <div className="relative">
+                                    <Button
+                                        type="button"
+                                        variant={showHeadings ? "secondary" : "ghost"}
+                                        size="sm"
+                                        onClick={() => setShowHeadings(!showHeadings)}
+                                        title="Headings"
+                                    >
+                                        <HeadingIcon className="h-4 w-4" />
+                                    </Button>
+
+                                    {showHeadings && (
+                                        <div className="absolute top-full left-0 mt-1 p-1 bg-popover border rounded-md shadow-md z-50 flex flex-col gap-1 min-w-[120px]">
+                                            <Button type="button" variant="ghost" size="sm" className="justify-start" onClick={() => { insertMarkdown("# ", ""); setShowHeadings(false); }}>
+                                                <Heading1 className="h-4 w-4 mr-2" /> Heading 1
+                                            </Button>
+                                            <Button type="button" variant="ghost" size="sm" className="justify-start" onClick={() => { insertMarkdown("## ", ""); setShowHeadings(false); }}>
+                                                <Heading2 className="h-4 w-4 mr-2" /> Heading 2
+                                            </Button>
+                                            <Button type="button" variant="ghost" size="sm" className="justify-start" onClick={() => { insertMarkdown("### ", ""); setShowHeadings(false); }}>
+                                                <Heading3 className="h-4 w-4 mr-2" /> Heading 3
+                                            </Button>
+                                            <Button type="button" variant="ghost" size="sm" className="justify-start" onClick={() => { insertMarkdown("#### ", ""); setShowHeadings(false); }}>
+                                                <Heading4 className="h-4 w-4 mr-2" /> Heading 4
+                                            </Button>
+                                            <Button type="button" variant="ghost" size="sm" className="justify-start" onClick={() => { insertMarkdown("##### ", ""); setShowHeadings(false); }}>
+                                                <Heading5 className="h-4 w-4 mr-2" /> Heading 5
+                                            </Button>
+                                            <Button type="button" variant="ghost" size="sm" className="justify-start" onClick={() => { insertMarkdown("###### ", ""); setShowHeadings(false); }}>
+                                                <Heading6 className="h-4 w-4 mr-2" /> Heading 6
+                                            </Button>
+                                        </div>
+                                    )}
+                                </div>
                                 <div className="w-px h-4 bg-border mx-1" />
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={insertTable}
-                                    title="Table"
-                                >
-                                    <TableIcon className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("---\n")}
-                                    title="Horizontal Rule"
-                                >
-                                    <Minus className="h-4 w-4" />
-                                </Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertAlignment('left')} title="Align Left"><AlignLeft className="h-4 w-4" /></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertAlignment('center')} title="Align Center"><AlignCenter className="h-4 w-4" /></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertAlignment('right')} title="Align Right"><AlignRight className="h-4 w-4" /></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertAlignment('justify')} title="Justify"><AlignJustify className="h-4 w-4" /></Button>
                                 <div className="w-px h-4 bg-border mx-1" />
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("[", "](url)")}
-                                    title="Link"
-                                >
-                                    🔗
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={handleContentImageUpload}
-                                    disabled={isUploading}
-                                    title="Upload Image"
-                                >
+                                <Button type="button" variant="ghost" size="sm" onClick={insertCaption} title="Image Caption"><Captions className="h-4 w-4" /></Button>
+                                <div className="w-px h-4 bg-border mx-1" />
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("- ")} title="Bullet List"><List className="h-4 w-4" /></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("1. ")} title="Numbered List"><ListOrdered className="h-4 w-4" /></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("> ")} title="Quote"><Quote className="h-4 w-4" /></Button>
+                                <div className="w-px h-4 bg-border mx-1" />
+                                <Button type="button" variant="ghost" size="sm" onClick={insertTable} title="Table"><TableIcon className="h-4 w-4" /></Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("---\n")} title="Horizontal Rule"><Minus className="h-4 w-4" /></Button>
+                                <div className="w-px h-4 bg-border mx-1" />
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("[", "](url)")} title="Link">🔗</Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={handleContentImageUpload} disabled={isUploading} title="Upload Image">
                                     {isUploading ? <span className="animate-spin">⏳</span> : <ImageIcon className="h-4 w-4" />}
                                 </Button>
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => insertMarkdown("```\n", "\n```")}
-                                    title="Code Block"
-                                >
-                                    {"</>"}
-                                </Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("```\n", "\n```")} title="Code Block">{"</>"}</Button>
                                 {/* Hidden input for content image upload */}
-                                <input
-                                    type="file"
-                                    id="content-image-upload"
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={onContentImageSelected}
-                                />
+                                <input type="file" id="content-image-upload" className="hidden" accept="image/*" onChange={onContentImageSelected} />
                             </div>
 
                             {/* Content Editor & Preview */}

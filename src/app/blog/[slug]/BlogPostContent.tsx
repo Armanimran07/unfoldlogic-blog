@@ -10,10 +10,10 @@ import { PostCard } from "@/components/PostCard";
 
 export function BlogPostContent({ post, recommendations }: { post: Post; recommendations: Post[] }) {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background overflow-x-hidden">
             {/* Hero Section with Gradient */}
             <div className="relative py-20 pb-32 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-cyan-500/5">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-cyan-500/10">
                     <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
                 </div>
 
