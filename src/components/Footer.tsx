@@ -4,7 +4,7 @@ import { Github, Twitter, Linkedin, Heart } from "lucide-react";
 export function Footer() {
     return (
         <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container py-10 md:py-16">
+            <div className="container px-4 py-10 md:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <div className="md:col-span-2 space-y-4">
                         <Link href="/" className="flex items-center space-x-2">
@@ -12,7 +12,7 @@ export function Footer() {
                                 UnfoldLogic
                             </span>
                         </Link>
-                        <p className="text-muted-foreground max-w-sm">
+                        <p className="text-muted-foreground text-sm md:text-base max-w-sm leading-relaxed">
                             Exploring the frontiers of technology, design, and innovation.
                             Join us on our journey to unfold the logic behind the digital world.
                         </p>
