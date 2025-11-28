@@ -5,7 +5,7 @@ export function Footer() {
     return (
         <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container px-4 py-10 md:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
                     <div className="md:col-span-2 space-y-4">
                         <Link href="/" className="flex items-center space-x-2">
                             <span className="font-bold text-2xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
@@ -33,6 +33,15 @@ export function Footer() {
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                             <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="font-semibold mb-4">Contact</h3>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                            <li>+91 92650 69809</li>
+                            <li>unfoldloogic@gmail.com</li>
+                            <li>Ahmedabad Gujarat</li>
                         </ul>
                     </div>
                 </div>

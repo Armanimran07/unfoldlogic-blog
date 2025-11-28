@@ -104,9 +104,9 @@ export default function ContactPage() {
 
                         <div className="grid gap-6">
                             {[
-                                { icon: Mail, title: "Email", value: "contact@unfoldlogic.com", color: "text-purple-500", bg: "bg-purple-500/10" },
-                                { icon: Phone, title: "Phone", value: "+1 (555) 123-4567", color: "text-blue-500", bg: "bg-blue-500/10" },
-                                { icon: MapPin, title: "Location", value: "San Francisco, CA, United States", color: "text-cyan-500", bg: "bg-cyan-500/10" }
+                                { icon: Mail, title: "Email", value: "unfoldloogic@gmail.com", color: "text-purple-500", bg: "bg-purple-500/10" },
+                                { icon: Phone, title: "Phone", value: "+91 92650 69809", color: "text-blue-500", bg: "bg-blue-500/10" },
+                                { icon: MapPin, title: "Location", value: "Ahmedabad Gujarat", color: "text-cyan-500", bg: "bg-cyan-500/10" }
                             ].map((item, index) => (
                                 <motion.div
                                     key={item.title}
