@@ -21,7 +21,7 @@ export default function PrivacyPage() {
                     <div className="prose prose-invert max-w-none space-y-8">
                         <section>
                             <p className="text-lg leading-relaxed text-muted-foreground">
-                                UnfoldLogic (“we”, “our”, “us”) is committed to protecting your personal information and your right to privacy.
+                                UnfoldLogic is committed to protecting your personal information and your right to privacy.
                                 This Privacy Policy outlines how we collect, use, store, and safeguard the data you share with us through our website and services.
                             </p>
                         </section>
