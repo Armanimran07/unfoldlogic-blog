@@ -4,6 +4,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
 interface MarkdownRendererProps {
     content: string;
 }
@@ -21,6 +25,38 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
+                components={{
+                    a: ({ node, href, className, children, ...props }) => {
+                        if (href?.endsWith("#cta")) {
+                            return (
+                                <span className="block my-6 not-prose">
+                                    <Link
+                                        href={href.replace("#cta", "")}
+                                        className={cn(buttonVariants({ variant: "default", size: "lg" }), "no-underline")}
+                                        {...props}
+                                    >
+                                        {children}
+                                    </Link>
+                                </span>
+                            );
+                        }
+
+                        // Handle internal links
+                        if (href?.startsWith("/")) {
+                            return (
+                                <Link href={href} className={className} {...props}>
+                                    {children}
+                                </Link>
+                            );
+                        }
+
+                        return (
+                            <a href={href} className={className} {...props}>
+                                {children}
+                            </a>
+                        );
+                    }
+                }}
             >
                 {content}
             </ReactMarkdown>

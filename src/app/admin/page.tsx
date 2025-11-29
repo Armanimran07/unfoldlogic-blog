@@ -29,7 +29,8 @@ import {
     Heading3,
     Heading4,
     Heading5,
-    Heading6
+    Heading6,
+    MousePointerClick
 } from "lucide-react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
@@ -409,6 +410,9 @@ export default function AdminDashboard() {
                                 <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("[", "](url)")} title="Link">🔗</Button>
                                 <Button type="button" variant="ghost" size="sm" onClick={handleContentImageUpload} disabled={isUploading} title="Upload Image">
                                     {isUploading ? <span className="animate-spin">⏳</span> : <ImageIcon className="h-4 w-4" />}
+                                </Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("[", "](url#cta)")} title="Call to Action Button">
+                                    <MousePointerClick className="h-4 w-4" />
                                 </Button>
                                 <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("```\n", "\n```")} title="Code Block">{"</>"}</Button>
                                 {/* Hidden input for content image upload */}
