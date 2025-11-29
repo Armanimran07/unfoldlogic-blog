@@ -66,8 +66,8 @@ export default function Home() {
 
   const stats = [
     { icon: Users, value: "50+", label: "Happy Clients" },
-    { icon: Award, value: "100+", label: "Projects Delivered" },
-    { icon: Clock, value: "5+", label: "Years Experience" },
+    { icon: Award, value: "100+", label: "Projects Shipped" },
+    { icon: Clock, value: "5+", label: "Years of Caffeinated Coding" },
     { icon: TrendingUp, value: "98%", label: "Client Satisfaction" }
   ];
 
@@ -124,16 +124,15 @@ export default function Home() {
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-              Building Smart Digital
+              We Speak Fluent Binary,
               <br />
               <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                Solutions That Drive Growth
+                But We Prefer Results
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10">
-              Explore insights on web development, Web3, blockchain, and software engineering
-              from the team at UnfoldLogic — your partner in digital innovation.
+              No fluff, just tough code. Explore insights on web development, Web3, and blockchain from the team at UnfoldLogic. We turn coffee into scalable solutions.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -176,7 +175,7 @@ export default function Home() {
               Our Core Services
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Full-cycle digital solutions — from concept to launch and beyond
+              From "Hello World" to IPO, we've got you covered.
             </p>
           </motion.div>
 
@@ -314,8 +313,7 @@ export default function Home() {
                   Stay Updated
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  Join our newsletter to get the latest insights on web development,
-                  Web3, blockchain, and software engineering delivered to your inbox.
+                  Get the latest tech tea. No spam, our servers are allergic to it.
                 </p>
               </div>
               <LeadForm />
@@ -334,11 +332,10 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Start Your Project?
+              Ready to Break the Internet?
             </h2>
             <p className="text-xl text-muted-foreground mb-10">
-              Get a free consultation and quote for your next website or software project.
-              No obligation — just expert advice tailored to your needs.
+              (In a good way.) Get a free consultation and quote for your next website or software project.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

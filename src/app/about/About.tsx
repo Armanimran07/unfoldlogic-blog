@@ -91,14 +91,13 @@ export default function AboutContent() {
                         transition={{ duration: 0.8 }}
                     >
                         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
-                            We Are <br />
+                            We Turn Coffee Into <br />
                             <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                                UnfoldLogic
+                                Scalable Code
                             </span>
                         </h1>
                         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed">
-                            A team of passionate developers and designers dedicated to transforming ideas into
-                            exceptional digital reality. We bridge the gap between complex technology and human experience.
+                            We are UnfoldLogic. A team of passionate developers who believe that great software shouldn't be boring. We bridge the gap between "it works on my machine" and "it works everywhere."
                         </p>
                     </motion.div>
                 </div>
@@ -116,29 +115,26 @@ export default function AboutContent() {
                         >
                             <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
                             <p className="text-lg text-muted-foreground mb-6">
-                                At UnfoldLogic, we believe that technology should be an enabler, not a barrier.
-                                Our mission is to democratize access to advanced digital solutions, helping businesses
-                                of all sizes thrive in the modern digital economy.
+                                At UnfoldLogic, we believe that technology should be cool, not confusing. Our mission is to democratize access to advanced digital solutions, helping businesses of all sizes thrive in the modern digital economy without the headache.
                             </p>
                             <p className="text-lg text-muted-foreground mb-8">
-                                Whether it's building the next generation of Web3 applications or crafting pixel-perfect
-                                marketing websites, we bring the same level of dedication and craftsmanship to every project.
+                                Whether it's building the next generation of Web3 applications or crafting pixel-perfect marketing websites, we bring the same level of dedication (and caffeine) to every project.
                             </p>
 
                             <div className="flex gap-4">
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-3xl font-bold text-primary">5+</h3>
-                                    <span className="text-sm text-muted-foreground">Years Experience</span>
+                                    <span className="text-sm text-muted-foreground">Years of Coding</span>
                                 </div>
                                 <div className="w-px bg-border" />
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-3xl font-bold text-primary">100+</h3>
-                                    <span className="text-sm text-muted-foreground">Projects Delivered</span>
+                                    <span className="text-sm text-muted-foreground">Projects Shipped</span>
                                 </div>
                                 <div className="w-px bg-border" />
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-3xl font-bold text-primary">24/7</h3>
-                                    <span className="text-sm text-muted-foreground">Support</span>
+                                    <span className="text-sm text-muted-foreground">Debugging</span>
                                 </div>
                             </div>
                         </motion.div>
@@ -179,7 +175,7 @@ export default function AboutContent() {
                     >
                         <h2 className="text-4xl font-bold mb-4">What Drives Us</h2>
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                            Core values that define our culture and the way we work
+                            Clean Code, Clear Conscience. And maybe a little bit of world domination (the nice kind).
                         </p>
                     </motion.div>
 
@@ -221,8 +217,7 @@ export default function AboutContent() {
                             Ready to Build Something Amazing?
                         </h2>
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-                            Let's collaborate to bring your vision to life. Whether it's a new venture or
-                            scaling an existing product, we're here to help.
+                            Let's collaborate to bring your vision to life. Whether it's a new venture or scaling an existing product, we're here to help.
                         </p>
                         <Link
                             href="/contact"

@@ -14,7 +14,7 @@ export function Footer() {
                         </Link>
                         <p className="text-muted-foreground text-sm md:text-base max-w-sm leading-relaxed">
                             Exploring the frontiers of technology, design, and innovation.
-                            Join us on our journey to unfold the logic behind the digital world.
+                            We unfold the logic so you don't have to.
                         </p>
                     </div>
 
@@ -52,7 +52,7 @@ export function Footer() {
 
                 <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-muted-foreground text-center md:text-left">
-                        © {new Date().getFullYear()} UnfoldLogic. All rights reserved.
+                        © {new Date().getFullYear()} UnfoldLogic. All rights reserved. No robots were harmed in the making of this site.
                     </p>
 
                     <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-8 text-center text-xs text-muted-foreground flex items-center justify-center gap-1">
-                    Made with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> by UnfoldLogic Team
+                    Made with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> and a lot of coffee by UnfoldLogic Team
                 </div>
             </div>
         </footer>

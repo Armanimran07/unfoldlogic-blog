@@ -57,11 +57,10 @@ export default function ContactPage() {
                         </motion.div>
 
                         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-                            Get in <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">Touch</span>
+                            Slide Into Our <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">DMs</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">
-                            Have a question, project idea, or just want to say hello?
-                            Fill out the form below and we'll get back to you shortly.
+                            (Professionally, of course.) Got a bug? A billion-dollar idea? Or just want to debate tabs vs spaces? We're all ears.
                         </p>
                     </motion.div>
                 </div>
@@ -146,7 +145,7 @@ export default function ContactPage() {
                                     <h3 className="font-semibold mb-2">Office Hours</h3>
                                     <p className="text-sm text-muted-foreground leading-relaxed">
                                         Monday - Friday: 9:00 AM - 6:00 PM PST<br />
-                                        Saturday - Sunday: Closed
+                                        We sleep on weekends... mostly.
                                     </p>
                                 </div>
                             </div>
