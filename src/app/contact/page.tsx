@@ -104,9 +104,9 @@ export default function ContactPage() {
 
                         <div className="grid gap-6">
                             {[
-                                { icon: Mail, title: "Email", value: "unfoldloogic@gmail.com", color: "text-purple-500", bg: "bg-purple-500/10" },
-                                { icon: Phone, title: "Phone", value: "+91 92650 69809", color: "text-blue-500", bg: "bg-blue-500/10" },
-                                { icon: MapPin, title: "Location", value: "Ahmedabad Gujarat", color: "text-cyan-500", bg: "bg-cyan-500/10" }
+                                { icon: Mail, title: "Email", value: "unfoldloogic@gmail.com", href: "mailto:unfoldloogic@gmail.com", color: "text-purple-500", bg: "bg-purple-500/10" },
+                                { icon: Phone, title: "Phone", value: "+91 92650 69809", href: "tel:+919265069809", color: "text-blue-500", bg: "bg-blue-500/10" },
+                                { icon: MapPin, title: "Location", value: "Ahmedabad Gujarat", href: "https://www.google.com/maps/search/?api=1&query=Ahmedabad+Gujarat", color: "text-cyan-500", bg: "bg-cyan-500/10" }
                             ].map((item, index) => (
                                 <motion.div
                                     key={item.title}
@@ -114,15 +114,21 @@ export default function ContactPage() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.3 + index * 0.1 }}
-                                    className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors group"
                                 >
-                                    <div className={`p-3 rounded-lg ${item.bg} ${item.color} group-hover:scale-110 transition-transform`}>
-                                        <item.icon className="h-6 w-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold mb-1">{item.title}</h3>
-                                        <p className="text-muted-foreground">{item.value}</p>
-                                    </div>
+                                    <a
+                                        href={item.href}
+                                        className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors group"
+                                        target={item.title === "Location" ? "_blank" : undefined}
+                                        rel={item.title === "Location" ? "noopener noreferrer" : undefined}
+                                    >
+                                        <div className={`p-3 rounded-lg ${item.bg} ${item.color} group-hover:scale-110 transition-transform`}>
+                                            <item.icon className="h-6 w-6" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold mb-1">{item.title}</h3>
+                                            <p className="text-muted-foreground group-hover:text-primary transition-colors">{item.value}</p>
+                                        </div>
+                                    </a>
                                 </motion.div>
                             ))}
                         </div>

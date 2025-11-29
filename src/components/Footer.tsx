@@ -39,8 +39,12 @@ export function Footer() {
                     <div>
                         <h3 className="font-semibold mb-4">Contact</h3>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li>+91 92650 69809</li>
-                            <li>unfoldloogic@gmail.com</li>
+                            <li>
+                                <a href="tel:+919265069809" className="hover:text-primary transition-colors">+91 92650 69809</a>
+                            </li>
+                            <li>
+                                <a href="mailto:unfoldloogic@gmail.com" className="hover:text-primary transition-colors">unfoldloogic@gmail.com</a>
+                            </li>
                             <li>Ahmedabad Gujarat</li>
                         </ul>
                     </div>
