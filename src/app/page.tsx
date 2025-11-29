@@ -120,7 +120,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
             >
               <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">Welcome to UnfoldLogic Insights</span>
+              <span className="text-sm font-medium">Welcome to the Logic Layer</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
