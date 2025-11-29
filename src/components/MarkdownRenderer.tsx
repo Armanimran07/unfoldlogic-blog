@@ -29,10 +29,13 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
                     a: ({ node, href, className, children, ...props }) => {
                         if (href?.endsWith("#cta")) {
                             return (
-                                <span className="block my-6 not-prose">
+                                <span className="block my-8 not-prose flex justify-center">
                                     <Link
                                         href={href.replace("#cta", "")}
-                                        className={cn(buttonVariants({ variant: "default", size: "lg" }), "no-underline")}
+                                        className={cn(
+                                            "relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white transition-all duration-200 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:from-purple-700 hover:to-blue-700 shadow-lg hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500",
+                                            "no-underline"
+                                        )}
                                         {...props}
                                     >
                                         {children}
