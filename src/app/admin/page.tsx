@@ -30,7 +30,9 @@ import {
     Heading4,
     Heading5,
     Heading6,
-    MousePointerClick
+    Heading6,
+    MousePointerClick,
+    Clipboard
 } from "lucide-react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
@@ -258,6 +260,18 @@ export default function AdminDashboard() {
         }
     };
 
+    const handlePasteClick = async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            if (text) {
+                insertMarkdown(text);
+            }
+        } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+            alert("Failed to read clipboard. Please allow clipboard access.");
+        }
+    };
+
     const uploadAndInsertImage = async (file: File) => {
         setIsUploading(true);
         try {
@@ -413,6 +427,9 @@ export default function AdminDashboard() {
                                 </Button>
                                 <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("[", "](url#cta)")} title="Call to Action Button">
                                     <MousePointerClick className="h-4 w-4" />
+                                </Button>
+                                <Button type="button" variant="ghost" size="sm" onClick={handlePasteClick} title="Paste Text">
+                                    <Clipboard className="h-4 w-4" />
                                 </Button>
                                 <Button type="button" variant="ghost" size="sm" onClick={() => insertMarkdown("```\n", "\n```")} title="Code Block">{"</>"}</Button>
                                 {/* Hidden input for content image upload */}
