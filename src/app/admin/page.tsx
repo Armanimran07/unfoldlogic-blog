@@ -670,62 +670,114 @@ export default function AdminDashboard() {
                 </TabsContent>
 
                 <TabsContent value="leads">
-                    <div className="border rounded-lg overflow-hidden">
-                        <table className="w-full text-sm text-left">
-                            <thead className="bg-muted text-muted-foreground uppercase">
-                                <tr>
-                                    <th className="px-6 py-3">Date</th>
-                                    <th className="px-6 py-3">Name</th>
-                                    <th className="px-6 py-3">Email</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-border bg-card">
-                                {leads.length === 0 ? (
+                    <div className="space-y-4">
+                        {/* Desktop View */}
+                        <div className="hidden md:block border rounded-lg overflow-hidden">
+                            <table className="w-full text-sm text-left">
+                                <thead className="bg-muted text-muted-foreground uppercase">
                                     <tr>
-                                        <td colSpan={3} className="px-6 py-4 text-center text-muted-foreground">No leads found</td>
+                                        <th className="px-6 py-3">Date</th>
+                                        <th className="px-6 py-3">Name</th>
+                                        <th className="px-6 py-3">Email</th>
                                     </tr>
-                                ) : (
-                                    leads.map((lead) => (
-                                        <tr key={lead.id} className="hover:bg-muted/50">
-                                            <td className="px-6 py-4">{new Date(lead.date).toLocaleDateString()}</td>
-                                            <td className="px-6 py-4 font-medium">{lead.name || "-"}</td>
-                                            <td className="px-6 py-4">{lead.email}</td>
+                                </thead>
+                                <tbody className="divide-y divide-border bg-card">
+                                    {leads.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={3} className="px-6 py-4 text-center text-muted-foreground">No leads found</td>
                                         </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
+                                    ) : (
+                                        leads.map((lead) => (
+                                            <tr key={lead.id} className="hover:bg-muted/50">
+                                                <td className="px-6 py-4">{new Date(lead.date).toLocaleDateString()}</td>
+                                                <td className="px-6 py-4 font-medium">{lead.name || "-"}</td>
+                                                <td className="px-6 py-4">{lead.email}</td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Mobile View */}
+                        <div className="grid gap-4 md:hidden">
+                            {leads.length === 0 ? (
+                                <div className="text-center p-8 border rounded-lg text-muted-foreground bg-card">No leads found</div>
+                            ) : (
+                                leads.map((lead) => (
+                                    <div key={lead.id} className="p-4 border rounded-lg bg-card space-y-3 shadow-sm">
+                                        <div className="flex justify-between items-start">
+                                            <div className="font-medium">{lead.name || "No Name"}</div>
+                                            <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                                                {new Date(lead.date).toLocaleDateString()}
+                                            </div>
+                                        </div>
+                                        <div className="text-sm text-muted-foreground flex items-center gap-2">
+                                            <span className="font-semibold text-foreground">Email:</span> {lead.email}
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
                     </div>
                 </TabsContent>
 
                 <TabsContent value="messages">
-                    <div className="border rounded-lg overflow-hidden">
-                        <table className="w-full text-sm text-left">
-                            <thead className="bg-muted text-muted-foreground uppercase">
-                                <tr>
-                                    <th className="px-6 py-3">Date</th>
-                                    <th className="px-6 py-3">Name</th>
-                                    <th className="px-6 py-3">Email</th>
-                                    <th className="px-6 py-3">Message</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-border bg-card">
-                                {messages.length === 0 ? (
+                    <div className="space-y-4">
+                        {/* Desktop View */}
+                        <div className="hidden md:block border rounded-lg overflow-hidden">
+                            <table className="w-full text-sm text-left">
+                                <thead className="bg-muted text-muted-foreground uppercase">
                                     <tr>
-                                        <td colSpan={4} className="px-6 py-4 text-center text-muted-foreground">No messages found</td>
+                                        <th className="px-6 py-3">Date</th>
+                                        <th className="px-6 py-3">Name</th>
+                                        <th className="px-6 py-3">Email</th>
+                                        <th className="px-6 py-3">Message</th>
                                     </tr>
-                                ) : (
-                                    messages.map((msg) => (
-                                        <tr key={msg.id} className="hover:bg-muted/50">
-                                            <td className="px-6 py-4 whitespace-nowrap">{new Date(msg.date).toLocaleDateString()}</td>
-                                            <td className="px-6 py-4 font-medium whitespace-nowrap">{msg.name}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap">{msg.email}</td>
-                                            <td className="px-6 py-4 min-w-[300px]">{msg.message}</td>
+                                </thead>
+                                <tbody className="divide-y divide-border bg-card">
+                                    {messages.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={4} className="px-6 py-4 text-center text-muted-foreground">No messages found</td>
                                         </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
+                                    ) : (
+                                        messages.map((msg) => (
+                                            <tr key={msg.id} className="hover:bg-muted/50">
+                                                <td className="px-6 py-4 whitespace-nowrap">{new Date(msg.date).toLocaleDateString()}</td>
+                                                <td className="px-6 py-4 font-medium whitespace-nowrap">{msg.name}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap">{msg.email}</td>
+                                                <td className="px-6 py-4 min-w-[300px]">{msg.message}</td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Mobile View */}
+                        <div className="grid gap-4 md:hidden">
+                            {messages.length === 0 ? (
+                                <div className="text-center p-8 border rounded-lg text-muted-foreground bg-card">No messages found</div>
+                            ) : (
+                                messages.map((msg) => (
+                                    <div key={msg.id} className="p-4 border rounded-lg bg-card space-y-3 shadow-sm">
+                                        <div className="flex justify-between items-start">
+                                            <div className="font-medium">{msg.name}</div>
+                                            <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+                                                {new Date(msg.date).toLocaleDateString()}
+                                            </div>
+                                        </div>
+                                        <div className="text-sm text-muted-foreground">
+                                            <span className="font-semibold text-foreground">Email:</span> {msg.email}
+                                        </div>
+                                        <div className="text-sm border-t pt-2 mt-2">
+                                            <div className="font-semibold mb-1 text-foreground">Message:</div>
+                                            <p className="whitespace-pre-wrap text-muted-foreground">{msg.message}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
                     </div>
                 </TabsContent>
             </Tabs>
