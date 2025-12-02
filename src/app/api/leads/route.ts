@@ -21,3 +21,13 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Failed to save lead' }, { status: 500 });
     }
 }
+
+export async function GET() {
+    try {
+        const { getLeads } = await import('@/lib/db');
+        const leads = await getLeads();
+        return NextResponse.json(leads);
+    } catch (error) {
+        return NextResponse.json({ error: 'Failed to fetch leads' }, { status: 500 });
+    }
+}

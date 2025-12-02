@@ -31,7 +31,9 @@ import {
     Heading5,
     Heading6,
     MousePointerClick,
-    Clipboard
+    Clipboard,
+    Users,
+    MessageSquare
 } from "lucide-react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
@@ -53,6 +55,8 @@ export default function AdminDashboard() {
     const [isUploading, setIsUploading] = useState(false);
     const [showPreview, setShowPreview] = useState(true);
     const [showHeadings, setShowHeadings] = useState(false);
+    const [leads, setLeads] = useState<any[]>([]);
+    const [messages, setMessages] = useState<any[]>([]);
 
     useEffect(() => {
         const isAuth = document.cookie.includes("admin_auth=true");
@@ -65,6 +69,10 @@ export default function AdminDashboard() {
     useEffect(() => {
         if (activeTab === "manage") {
             fetchPosts();
+        } else if (activeTab === "leads") {
+            fetchLeads();
+        } else if (activeTab === "messages") {
+            fetchMessages();
         }
     }, [activeTab]);
 
@@ -75,6 +83,26 @@ export default function AdminDashboard() {
             setPosts(data);
         } catch (error) {
             console.error("Failed to fetch posts", error);
+        }
+    };
+
+    const fetchLeads = async () => {
+        try {
+            const res = await fetch("/api/leads");
+            const data = await res.json();
+            setLeads(data);
+        } catch (error) {
+            console.error("Failed to fetch leads", error);
+        }
+    };
+
+    const fetchMessages = async () => {
+        try {
+            const res = await fetch("/api/contact");
+            const data = await res.json();
+            setMessages(data);
+        } catch (error) {
+            console.error("Failed to fetch messages", error);
         }
     };
 
@@ -329,11 +357,13 @@ export default function AdminDashboard() {
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-8">
+                <TabsList className="grid w-full grid-cols-4 mb-8">
                     <TabsTrigger value="create">
                         {editingId ? "Edit Post" : "Create Post"}
                     </TabsTrigger>
                     <TabsTrigger value="manage">Manage Posts</TabsTrigger>
+                    <TabsTrigger value="leads">Leads</TabsTrigger>
+                    <TabsTrigger value="messages">Messages</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="create">

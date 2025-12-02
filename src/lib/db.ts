@@ -105,12 +105,40 @@ export async function saveLead(lead: Lead): Promise<void> {
     if (error) throw error;
 }
 
+export async function getLeads(): Promise<Lead[]> {
+    const { data, error } = await supabase
+        .from('leads')
+        .select('*')
+        .order('date', { ascending: false });
+
+    if (error) {
+        console.error('Error fetching leads:', error);
+        return [];
+    }
+
+    return data || [];
+}
+
 export async function saveMessage(message: ContactMessage): Promise<void> {
     const { error } = await supabase
         .from('messages')
         .insert([message]);
 
     if (error) throw error;
+}
+
+export async function getMessages(): Promise<ContactMessage[]> {
+    const { data, error } = await supabase
+        .from('messages')
+        .select('*')
+        .order('date', { ascending: false });
+
+    if (error) {
+        console.error('Error fetching messages:', error);
+        return [];
+    }
+
+    return data || [];
 }
 
 export async function getRecommendedPosts(currentSlug: string): Promise<Post[]> {

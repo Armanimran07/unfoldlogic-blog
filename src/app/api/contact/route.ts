@@ -22,3 +22,13 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Failed to save message' }, { status: 500 });
     }
 }
+
+export async function GET() {
+    try {
+        const { getMessages } = await import('@/lib/db');
+        const messages = await getMessages();
+        return NextResponse.json(messages);
+    } catch (error) {
+        return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 });
+    }
+}
