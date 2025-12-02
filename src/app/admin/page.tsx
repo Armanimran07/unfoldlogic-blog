@@ -656,6 +656,66 @@ export default function AdminDashboard() {
                         )}
                     </div>
                 </TabsContent>
+
+                <TabsContent value="leads">
+                    <div className="border rounded-lg overflow-hidden">
+                        <table className="w-full text-sm text-left">
+                            <thead className="bg-muted text-muted-foreground uppercase">
+                                <tr>
+                                    <th className="px-6 py-3">Date</th>
+                                    <th className="px-6 py-3">Name</th>
+                                    <th className="px-6 py-3">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-border bg-card">
+                                {leads.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={3} className="px-6 py-4 text-center text-muted-foreground">No leads found</td>
+                                    </tr>
+                                ) : (
+                                    leads.map((lead) => (
+                                        <tr key={lead.id} className="hover:bg-muted/50">
+                                            <td className="px-6 py-4">{new Date(lead.date).toLocaleDateString()}</td>
+                                            <td className="px-6 py-4 font-medium">{lead.name || "-"}</td>
+                                            <td className="px-6 py-4">{lead.email}</td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </TabsContent>
+
+                <TabsContent value="messages">
+                    <div className="border rounded-lg overflow-hidden">
+                        <table className="w-full text-sm text-left">
+                            <thead className="bg-muted text-muted-foreground uppercase">
+                                <tr>
+                                    <th className="px-6 py-3">Date</th>
+                                    <th className="px-6 py-3">Name</th>
+                                    <th className="px-6 py-3">Email</th>
+                                    <th className="px-6 py-3">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-border bg-card">
+                                {messages.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={4} className="px-6 py-4 text-center text-muted-foreground">No messages found</td>
+                                    </tr>
+                                ) : (
+                                    messages.map((msg) => (
+                                        <tr key={msg.id} className="hover:bg-muted/50">
+                                            <td className="px-6 py-4 whitespace-nowrap">{new Date(msg.date).toLocaleDateString()}</td>
+                                            <td className="px-6 py-4 font-medium whitespace-nowrap">{msg.name}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap">{msg.email}</td>
+                                            <td className="px-6 py-4 min-w-[300px]">{msg.message}</td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </TabsContent>
             </Tabs>
         </div>
     );
