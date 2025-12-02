@@ -90,9 +90,15 @@ export default function AdminDashboard() {
         try {
             const res = await fetch("/api/leads");
             const data = await res.json();
-            setLeads(data);
+            if (Array.isArray(data)) {
+                setLeads(data);
+            } else {
+                console.error("Leads data is not an array:", data);
+                setLeads([]);
+            }
         } catch (error) {
             console.error("Failed to fetch leads", error);
+            setLeads([]);
         }
     };
 
@@ -100,9 +106,15 @@ export default function AdminDashboard() {
         try {
             const res = await fetch("/api/contact");
             const data = await res.json();
-            setMessages(data);
+            if (Array.isArray(data)) {
+                setMessages(data);
+            } else {
+                console.error("Messages data is not an array:", data);
+                setMessages([]);
+            }
         } catch (error) {
             console.error("Failed to fetch messages", error);
+            setMessages([]);
         }
     };
 
