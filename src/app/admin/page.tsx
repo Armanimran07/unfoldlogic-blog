@@ -36,6 +36,7 @@ import {
     MessageSquare
 } from "lucide-react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import TurndownService from "turndown";
 
 export default function AdminDashboard() {
     const router = useRouter();
@@ -287,6 +288,8 @@ export default function AdminDashboard() {
 
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
         const items = e.clipboardData.items;
+
+        // Handle images first
         for (let i = 0; i < items.length; i++) {
             if (items[i].type.indexOf("image") !== -1) {
                 e.preventDefault();
@@ -296,6 +299,18 @@ export default function AdminDashboard() {
                 }
                 return;
             }
+        }
+
+        // Handle rich text (HTML)
+        const html = e.clipboardData.getData("text/html");
+        if (html) {
+            e.preventDefault();
+            const turndownService = new TurndownService({
+                headingStyle: "atx",
+                codeBlockStyle: "fenced"
+            });
+            const markdown = turndownService.turndown(html);
+            insertMarkdown(markdown);
         }
     };
 
