@@ -287,11 +287,13 @@ export default function AdminDashboard() {
     };
 
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        console.log("Paste event triggered");
         const items = e.clipboardData.items;
 
         // Handle images first
         for (let i = 0; i < items.length; i++) {
             if (items[i].type.indexOf("image") !== -1) {
+                console.log("Image detected in paste");
                 e.preventDefault();
                 const file = items[i].getAsFile();
                 if (file) {
@@ -303,13 +305,16 @@ export default function AdminDashboard() {
 
         // Handle rich text (HTML)
         const html = e.clipboardData.getData("text/html");
+        console.log("HTML content in clipboard:", html ? "Yes" : "No");
         if (html) {
+            console.log("Converting HTML to Markdown...");
             e.preventDefault();
             const turndownService = new TurndownService({
                 headingStyle: "atx",
                 codeBlockStyle: "fenced"
             });
             const markdown = turndownService.turndown(html);
+            console.log("Converted Markdown:", markdown);
             insertMarkdown(markdown);
         }
     };
