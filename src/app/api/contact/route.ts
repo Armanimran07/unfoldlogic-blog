@@ -25,10 +25,21 @@ export async function POST(request: Request) {
 
 export async function GET() {
     try {
-        const { getMessages } = await import('@/lib/db');
-        const messages = await getMessages();
-        return NextResponse.json(messages);
+        const { createClient } = await import('@supabase/supabase-js');
+        const supabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!
+        );
+
+        const { data, error } = await supabase
+            .from('messages')
+            .select('*')
+            .order('date', { ascending: false });
+
+        if (error) throw error;
+        return NextResponse.json(data);
     } catch (error) {
+        console.error("Error fetching messages:", error);
         return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 });
     }
 }
